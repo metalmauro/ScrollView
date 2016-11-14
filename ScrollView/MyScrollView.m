@@ -30,36 +30,26 @@
 */
 
 -(void)panView:(UIPanGestureRecognizer *)sender {
-    CGPoint start;
-    CGPoint end;
-    CGFloat yScroll;
-//    switch (sender.state) {
-//        case UIGestureRecognizerStateBegan:
-//            start = [sender translationInView:self];
-//            break;
-//        case UIGestureRecognizerStateChanged:
-//            end = [sender translationInView:self];
-//            yScroll = end.y - start.y;
-//            [self setBounds:CGRectMake(self.bounds.origin.x, self.bounds.origin.y+yScroll, self.bounds.size.width, self.bounds.size.height)];
-//            break;
-////        case UIGestureRecognizerStateEnded:
-////            end = [sender translationInView:self];
-////            yScroll = end.y - start.y;
-////            [self setBounds:CGRectMake(self.bounds.origin.x, self.bounds.origin.y+yScroll, self.bounds.size.width, self.bounds.size.height)];
-////            break;
-//        default:
-//            break;
+    
+//    CGPoint start;
+//    CGPoint end;
+//    CGFloat yScroll;
+//    if(sender.state == UIGestureRecognizerStateBegan)
+//    {
+//        start = [sender translationInView:self];
 //    }
-    if(sender.state == UIGestureRecognizerStateBegan)
-    {
-        start = [sender translationInView:self];
-    }
-    if(sender.state == UIGestureRecognizerStateChanged)
-    {
-        end = [sender translationInView:self];
-        yScroll = end.y - start.y;
-        [self setFrame:CGRectMake(self.bounds.origin.x, self.bounds.origin.y+yScroll, self.bounds.size.width, self.bounds.size.height)];
-    }
+//    if(sender.state == UIGestureRecognizerStateChanged)
+//    {
+//        end = [sender translationInView:self];
+//        yScroll = end.y - start.y;
+//        [self setFrame:CGRectMake(self.bounds.origin.x, self.bounds.origin.y+yScroll, self.bounds.size.width, self.bounds.size.height)];
+//    }
+    
+    CGPoint translationInView = [sender translationInView:self];
+    CGPoint oldCenter = sender.view.center;
+    CGPoint newCenter = CGPointMake(oldCenter.x, oldCenter.y + translationInView.y);
+    sender.view.center = newCenter;
+    [sender setTranslation:CGPointZero inView:self];
     
 }
 
